@@ -28,7 +28,7 @@ INNER JOIN entidades AS c ON b.id_entidad = c.id WHERE a.id = '$id'");
         ///
         //$image_file = 'logo.jpg';
         //$this->Image($image_file, 89, 5, 40, '','JPG');
-        $this->Image($image_file, 89, 5, 40, 23);
+        $this->Image($image_file, 89, 5, 40, 23,'PNG');
         // Set font
         $this->SetFont('helvetica', 'B', 20);
         // Title

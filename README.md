@@ -1,4 +1,3 @@
-codice.v.1.1
-============
+# Kohana PHP Framework, version 3.1 (release)
 
-codice version 1.1
+This is the current release version of [Kohana](http://kohanaframework.org/).

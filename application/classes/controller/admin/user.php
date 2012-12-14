@@ -56,8 +56,8 @@ class Controller_Admin_User extends Controller_AdminTemplate {
     //crear un nuevo usuario mediante 'id_oficina'
     public function action_create($id=0)
     {
+                 
         $oficina=ORM::factory('oficinas',array('id'=>$id));
-        $_POST['fecha_creacion']=date("Y-m-d H:i:s");
         if($oficina->loaded())
          {
            $entidad=$oficina->entidad->find();
@@ -101,7 +101,6 @@ class Controller_Admin_User extends Controller_AdminTemplate {
                     'superior',
                     'dependencia',
                     'id_entidad',
-                    'fecha_creacion',
                 ));                
                 
                 
