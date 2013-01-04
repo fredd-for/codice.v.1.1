@@ -25,7 +25,7 @@ function InsertHTML(imagen)
 		alert( 'You must be on WYSIWYG mode!' );
 }
 $(function(){
-//$('#frmCreate').validate();
+$('#frmCreate').validate();
     var config={
     toolbar : [ ['Maximize','Preview','SelectAll','Cut', 'Copy','Paste', 'Pagebreak','PasteFromWord','PasteText','-','Bold','Italic','Underline','FontSize','Font','TextColor','BGColor',,'NumberedList','BulletedList'],
                 ['Undo','Redo','-','Print','SpellChecker','Scayt','-','Find','Replace','-','Table','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']],
@@ -94,7 +94,7 @@ $('#crear').click(function(){
 <input type="hidden" name="proceso" value="4"/> 
 <p>
 <?php echo Form::label('destinatario(s)', 'Destinatario(s):',array('class'=>'form'));?>
-<textarea name="destinatario" ROWS="5" id="destinatario" style="width: 525px;"></textarea>    
+    <textarea name="destinatario" ROWS="5" id="destinatario" style="width: 525px;" class="required"></textarea>    
 </p>
 <input type="hidden" name="cargo_des" />
 <p>
@@ -139,7 +139,7 @@ $('#crear').click(function(){
 ?>
 <?php
    echo Form::label('copias', 'Con copia a:',array('class'=>'form'));
-   echo Form::input('copias','',array('id'=>'adjuntos','size'=>40,'class'=>'required'));
+   echo Form::input('copias','',array('id'=>'adjuntos','size'=>40));
 ?>
 </td>
 </tr>

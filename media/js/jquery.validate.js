@@ -236,9 +236,9 @@ $.extend($.validator, {
 
 	messages: {
 		required: "Campo requerido.",
-		remote: "Please fix this field.",
+		remote: "Por favor corriga este campo.",
 		email: "Ingrese una direccion de email valido.",
-		url: "Please enter a valid URL.",
+		url: "Introdusca una URL valido.",
 		date: "Ingrese una fecha valida.",
 		dateISO: "Please enter a valid date (ISO).",
 		dateDE: "Bitte geben Sie ein gültiges Datum ein.",
@@ -246,7 +246,7 @@ $.extend($.validator, {
 		numberDE: "Bitte geben Sie eine Nummer ein.",
 		digits: "Ingrese digitos",
 		creditcard: "Please enter a valid credit card number.",
-		equalTo: "Please enter the same value again.",
+		equalTo: "Introduzca el mismo valor de nuevo.",
 		accept: "Please enter a value with a valid extension.",
 		maxlength: $.format("Please enter no more than {0} characters."),
 		minlength: $.format("Ingrese {0} caracteres como minimo."),

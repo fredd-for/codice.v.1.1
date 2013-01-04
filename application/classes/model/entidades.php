@@ -6,12 +6,12 @@ class Model_entidades extends ORM{
     protected $_sorting=array('entidad'=>'ASC');
     //7una ofician tiene varios funcionarios (usuarios)
     protected $_has_many=array(
-        'oficina' =>array(
-            'model'=>'oficinas',
-            'through' => 'entidades_oficinas',
-            'foreign_key' => 'id_oficina',
-            'far_key' => 'id_entidad',
-        ),
+//        'oficina' =>array(
+//            'model'=>'oficinas',
+//            'through' => 'entidades_oficinas',
+//            'foreign_key' => 'id_oficina',
+//            'far_key' => 'id_entidad',
+//        ),
         'oficinas'=>array(
             'model'=>'oficinas',
             'foreign_key' => 'id_entidad',

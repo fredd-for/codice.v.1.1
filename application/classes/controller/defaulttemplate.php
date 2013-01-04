@@ -18,7 +18,7 @@
             $this->template->header           = '';
             $this->template->content          = '';
             $this->template->menu             = '';
-            $this->template->footer           = 'copyright Ivan Marcelo Chacolla';
+            $this->template->footer           = 'copyright Luis Freddy Velasco';
             $this->template->adminmenu        = '';
             $this->template->styles           = array();
             $this->template->scripts          = array();   

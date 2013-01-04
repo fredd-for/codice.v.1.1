@@ -4,6 +4,14 @@ defined('SYSPATH') or die ('no tiene acceso');
 class Model_Carpetas extends ORM{
     protected $_table_names_plural = false;
     protected $_sorting = array('carpeta' => 'ASC');   
+    
+    protected $_belogn_to=array(
+        'oficinas'=>array(
+            'model'=>'oficinas',
+            'foreign_key'=>'id_carpeta'
+        )
+    );
+    
     public function archivadores($id_user)
     {
         $sql="SELECT c.id,c.carpeta, COUNT(c.carpeta) as cc 
@@ -13,6 +21,13 @@ class Model_Carpetas extends ORM{
         GROUP BY c.id
         ORDER BY c.carpeta";
         return $this->_db->query(Database::SELECT,$sql,TRUE);
+    }
+    
+    public function lista_carpetas()
+    {
+        $sql="SELECT car.id,car.carpeta,car.fecha_creacion,car.nivel,ofi.sigla,ofi.oficina
+FROM carpetas AS car INNER JOIN oficinas AS ofi ON car.id_oficina = ofi.id";
+        return db::query(Database::SELECT, $sql)->execute();
     }
 }
 ?>

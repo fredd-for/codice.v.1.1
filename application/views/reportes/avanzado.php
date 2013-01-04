@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td>De fecha:</td>
-            <td><input type="text" name="fecha1" id="fecha1" value="2012-01-01"/></td>
+            <td><input type="text" name="fecha1" id="fecha1" value="<?php echo date('Y-m-d');?>"/></td>
             <td>A fecha:</td>
             <td><input type="text" name="fecha2" id="fecha2" value="<?php echo date('Y-m-d');?>" /></td>
         </tr>

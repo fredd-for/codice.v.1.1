@@ -1,6 +1,6 @@
-<script>
+<script type="text/javascript">
 $(function(){
-    $('input:first').focus();
+    $("#frm").validate();
 });
 </script>
 <h2 class="subtitulo">Crear una nueva entidad<br/><span>Llene correctamente los datos del formulario</span></h2>
@@ -12,15 +12,15 @@ $(function(){
     <?php endforeach;?>
 </ul>
 <?php endif;?>
-<form method="post">
+<form method="post" id="frm">
     <table>
         <tr>
             <td><?php echo Form::label('Nombre de la Entidad');?></td>
-            <td><?php echo Form::input('entidad',Arr::get($_POST, 'entidad',''),array('size'=>60));?></td>
+            <td><?php echo Form::input('entidad',Arr::get($_POST, 'entidad',''),array('size'=>60,'class'=>'required'));?></td>
         </tr>
         <tr>
             <td><?php echo Form::label('Sigla');?></td>
-            <td><?php echo Form::input('sigla',Arr::get($_POST, 'sigla',''));?></td>
+            <td><?php echo Form::input('sigla',Arr::get($_POST, 'sigla',''),array('class'=>'required'));?></td>
         </tr>
     </table>
 <hr/>

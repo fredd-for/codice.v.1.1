@@ -25,7 +25,7 @@ function InsertHTML(imagen)
 		alert( 'You must be on WYSIWYG mode!' );
 }
 $(function(){
-//$('#frmCreate').validate();
+$("#frmCreate").validate();
     var config={
     toolbar : [ ['Maximize','Preview','SelectAll','Cut', 'Copy','Paste', 'Pagebreak','PasteFromWord','PasteText','-','Bold','Italic','Underline','FontSize','Font','TextColor','BGColor',,'NumberedList','BulletedList'],
                 ['Undo','Redo','-','SpellChecker','Scayt','-','Find','Replace','-','Table','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']],
@@ -128,11 +128,11 @@ echo Form::input('cargo_des','',array('id'=>'cargo_des','size'=>40,'class'=>'req
 <input type="hidden" size="40" name="institucion_des" />   
 <?php
 echo Form::label('via', 'Via:',array('class'=>'form'));
-echo Form::input('via','',array('id'=>'via','size'=>40,'class'=>'required'));
+echo Form::input('via','',array('id'=>'via','size'=>40));
 ?>
 <?php
 echo Form::label('cargovia', 'Cargo Via:',array('class'=>'form'));
-echo Form::input('cargovia','',array('id'=>'cargovia','size'=>40,'class'=>'required'));
+echo Form::input('cargovia','',array('id'=>'cargovia','size'=>40));
 ?>
 <?php endif;?>
 </p>
@@ -153,11 +153,11 @@ echo Form::input('cargovia','',array('id'=>'cargovia','size'=>40,'class'=>'requi
 ?>
 <?php
    echo Form::label('adjuntos', 'Adjunto:',array('class'=>'form'));
-   echo Form::input('adjuntos','',array('id'=>'adjuntos','size'=>40,'class'=>'required','title'=>'Ejemplo: Lo citado'));
+   echo Form::input('adjuntos','',array('id'=>'adjuntos','size'=>40,'title'=>'Ejemplo: Lo citado'));
 ?>
 <?php
             echo Form::label('copias', 'Con copia a:',array('class'=>'form'));
-            echo Form::input('copias','',array('id'=>'adjuntos','size'=>40,'class'=>'required'));
+            echo Form::input('copias','',array('id'=>'adjuntos','size'=>40));
             ?>
 </p>
 </td>

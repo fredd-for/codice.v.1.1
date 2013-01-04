@@ -7,7 +7,7 @@ $(function(){
 });
 </script>
 <h2 class="subtitulo"><?php echo $oficina;?><br/><span>LISTA DE USUARIOS</span></h2>
-<div style="text-align: center; " ><a href="/admin/oficinas/lista/<?php echo $id_entidad;?>" style="font-size: 14px; "><?php echo $entidad->entidad;?></a></div>
+<div style="text-align: center; " ><a href="/admin/oficinas/lista/<?php echo $entidad->id;?>" style="font-size: 14px; "><?php echo $entidad->entidad;?></a></div>
 <br/>
 <?php echo Form::select('id_oficina', $options, $id_oficina,array('id'=>'id_oficina'));?>
 <div style="float: right;"><a href="/admin/user/create/<?php echo $id_oficina;?>" class="uibutton">+ Nuevo Usuario</a></div>
@@ -52,8 +52,8 @@ $(function(){
     </tbody>
 </table>
 <?php
-echo '<pre>';
-var_dump($users);
-echo '</pre>';
+//echo '<pre>';
+//var_dump($users);
+//echo '</pre>';
 
 ?>

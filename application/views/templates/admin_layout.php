@@ -18,8 +18,8 @@
     <div id="top">
         <div id="modx-topbar">
             <div id="modx-site-name">
-            PaperWork
-            <span class="modx-version">Sistema de Correspondencia</span>
+            Codice
+            <span class="modx-version">Correspondencia Digital Centralizada</span>
             </div>
             <div id="modx-logo">                
             </div>            

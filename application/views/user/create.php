@@ -4,13 +4,12 @@ $(function(){
     var pass2=$("#password_confirm").val();
     $("#frmUsuario").validate();
     //verificar usuario
-    $('#username').blur(function()
-    {    
+    $('#username').blur(function(){    
     var username=$('#username').val();
     $.ajax({
 	            type: "POST",
 	            data: { username : username },
-	            url: "/ajax/username",
+	            url: "/codice/ajax/username",
 	            dataType: "json",
 	            success: function(data)
 	            {   
@@ -22,21 +21,40 @@ $(function(){
 	            }
           });
     });
-    $('#email').blur(function(){
-        var username=$('#email').val();
+    
+        $('#email').blur(function(){
+        var email=$('#email').val();
         $.ajax({
 	            type: "POST",
-	            data: { username : username },
-	            url: "/ajax/email",
+	            data: { email : email },
+	            url: "/codice/ajax/email",
 	            dataType: "json",
 	            success: function(data)
 	            {                      
-                        $.each(data, function(x,item){
-                            $('#email_error').val(item);
-                        });                        
+                        if(data.result==1)
+                            {
+                                alert("El email '"+email+"' ya existe en la BD, elija otro por favor.");
+                                $('#email').focus();
+                            }                                 
 	            }
           });
     });
+    
+//    $('#email').blur(function(){
+//        var username=$('#email').val();
+//        $.ajax({
+//	            type: "POST",
+//	            data: { username : username },
+//	            url: "/codice/ajax/email",
+//	            dataType: "json",
+//	            success: function(data)
+//	            {                      
+//                        $.each(data, function(x,item){
+//                            $('#email_error').val(item);
+//                        });                        
+//	            }
+//          });
+//    });
 });
 </script>
 
@@ -95,10 +113,7 @@ $(function(){
     <?php echo Form::label('nombre', 'Nombre Completo:'); ?>                    
     </td>
     <td>
-    <?php echo Form::input('nombre', HTML::chars(Arr::get($_POST, 'nombre')),array('size'=>70)); ?>
-    <span class="error">
-       <?php echo Arr::get($errors, 'nombre'); ?>
-    </span>    
+    <?php echo Form::input('nombre', HTML::chars(Arr::get($_POST, 'nombre')),array('size'=>70,'class'=>'required')); ?>
     </td>
 </tr>
 <tr>
@@ -129,7 +144,7 @@ $(function(){
     <?php echo Form::label('email', 'Direcci&oacute;n Email:'); ?>    
     </td>
     <td>
-    <?php echo Form::input('email', HTML::chars(Arr::get($_POST, 'email')),array('size'=>70,'class'=>'required email')); ?>
+    <?php echo Form::input('email', HTML::chars(Arr::get($_POST, 'email')),array('size'=>70,'id'=>'email','class'=>'required email')); ?>
     <span class="error">
        <?php echo Arr::get($errors, 'email'); ?>
     </span>    
@@ -160,7 +175,7 @@ $(function(){
     <?php echo Form::label('password', 'Contrase&ntilde;a:'); ?>    
     </td>
     <td>
-    <?php echo Form::password('password','',array('id'=>'password','minlength'=>6)); ?>
+    <?php echo Form::password('password','',array('id'=>'password','minlength'=>6,'class'=>'required')); ?>
     <span class="error">
     <?php echo Arr::get($errors, 'password'); ?>
     </span>    

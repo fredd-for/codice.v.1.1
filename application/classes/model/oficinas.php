@@ -10,15 +10,19 @@ class Model_Oficinas extends ORM{
             'model'=>'users',
             'foreign_key' =>'id_oficina'
         ),
+        'carpetas' =>array(
+            'model'=>'carpetas',
+            'foreign_key' =>'id_oficina'
+        ),
         'tipo' =>array(
             'through' => 'tipo_oficina',
         ),
-        'entidad' => array(
-            'model'=>'entidades',
-            'through' => 'entidades_oficinas',
-            'foreign_key' => 'id_oficina',
-            'far_key' => 'id_entidad',
-         ),
+//        'entidad' => array(
+//            'model'=>'entidades',
+//            'through' => 'entidades_oficinas',
+//            'foreign_key' => 'id_oficina',
+//            'far_key' => 'id_entidad',
+//         ),
     );
     protected $_belogn_to=array(
         'entidades'=>array(

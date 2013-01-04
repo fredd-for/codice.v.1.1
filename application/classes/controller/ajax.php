@@ -237,6 +237,18 @@ class Controller_Ajax extends Controller {
 		
 		echo json_encode(array('result' => $res));
 	}
+        
+        //verificamos un email unico
+         public function action_email()
+	{
+		$email = Arr::get($_POST, 'email', '');		
+		$myuser = ORM::factory('users',array('email'=>$email));
+                $res=0;
+                if($myuser->loaded()){
+                    $res=1;
+                }				
+		echo json_encode(array('result' => $res));
+	}
 	
 	public function action_checkOldPass()
 	{

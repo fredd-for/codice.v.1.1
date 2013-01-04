@@ -181,7 +181,7 @@ class Controller_Reportes extends Controller_DefaultTemplate{
         else
         {
         $oficinas=$this->oficinas();
-        $fecha_inicio=date('Y-m-d',$this->user->fecha_creacion);
+        $fecha_inicio=date('Y-m-d');
         $this->template->title.='| correspondencia recibida';
         $this->template->styles=array('media/css/jquery-ui-1.8.16.custom.css'=>'screen');
         $this->template->scripts=array('media/js/jquery-ui-1.8.16.custom.min.js');
@@ -228,7 +228,8 @@ class Controller_Reportes extends Controller_DefaultTemplate{
         else
         {
         $oficinas=$this->oficinas();
-        $fecha_inicio=date('Y-m-d',$this->user->fecha_creacion);
+        //$fecha_inicio=date('Y-m-d',$this->user->fecha_creacion);
+        $fecha_inicio=date('Y-m-d');
         $this->template->title.='| Correspondencia enviada';
         $this->template->styles=array('media/css/jquery-ui-1.8.16.custom.css'=>'screen');
         $this->template->scripts=array('media/js/jquery-ui-1.8.16.custom.min.js');
