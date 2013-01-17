@@ -80,7 +80,7 @@ if (isset($_SERVER['KOHANA_ENV']))
  * - boolean  caching     enable or disable internal caching                 FALSE
  */
 Kohana::init(array(
-	'base_url'   => 'http://localhost:8081/codice',
+	'base_url'   => 'http://localhost/codice2',
 	'index_file'   => 'index.php',
 ));
 

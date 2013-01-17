@@ -25,8 +25,8 @@ class Model_nurs extends ORM {
 
         //si existe el tipo para la entidad entonces 
         if ($result->id) {
-            //$result->correlativo=$result->correlativo+1;        
-            $result->correlativo = $result->correlativo;
+            $result->correlativo=$result->correlativo+1;        
+            //$result->correlativo = $result->correlativo;
             $result->save();
             $codigo = $a . date('Y') . '-' . substr('0000' . $result->correlativo, -5);
             return $codigo;
