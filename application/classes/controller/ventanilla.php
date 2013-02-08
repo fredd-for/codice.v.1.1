@@ -123,7 +123,7 @@ class Controller_ventanilla extends Controller_DefaultTemplate{
                 $documento->nombre_remitente=$_POST['remitente'];
                 $documento->cargo_remitente=$_POST['cargorem'];
                 $documento->institucion_remitente=$_POST['institucionrem'];
-                $documento->referencia=$_POST['descripcion'];
+                $documento->referencia=  strtoupper($_POST['descripcion']);
                 $documento->adjuntos=$_POST['adjunto'];
                 $documento->original=1;
                 $documento->hojas=$_POST['hojas'];
@@ -261,7 +261,7 @@ class Controller_ventanilla extends Controller_DefaultTemplate{
                 $documento->nombre_remitente=$_POST['remitente'];
                 $documento->cargo_remitente=$_POST['cargorem'];
                 $documento->institucion_remitente=$_POST['institucionrem'];
-                $documento->referencia=$_POST['descripcion'];
+                $documento->referencia=  strtoupper($_POST['descripcion']);
                 $documento->adjuntos=$_POST['adjunto'];
                 $documento->hojas=$_POST['hojas'];
                // $documento->id_proceso=Arr::get($_POST,'proceso',1);

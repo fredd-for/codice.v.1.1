@@ -86,7 +86,7 @@ class Controller_documento extends Controller_DefaultTemplate{
                                 $documento->nombre_remitente=$_POST['remitente'];
                                 $documento->cargo_remitente=$_POST['cargo_rem'];                                
                                 $documento->mosca_remitente=$_POST['mosca'];
-                                $documento->referencia=$_POST['referencia'];
+                                $documento->referencia=  strtoupper($_POST['referencia']);
                                 $documento->contenido=$_POST['descripcion'];
                                 $documento->fecha_creacion= date('Y-m-d H:i:s');
                                 $documento->adjuntos=$_POST['adjuntos'];                        
@@ -324,7 +324,7 @@ public function action_tipo($t='')
                    $documento->nombre_remitente=$_POST['remitente'];
                    $documento->cargo_remitente=$_POST['cargo_rem'];
                    $documento->mosca_remitente=$_POST['mosca'];
-                   $documento->referencia=$_POST['referencia'];
+                   $documento->referencia=  strtoupper($_POST['referencia']);
                    $documento->contenido=$_POST['descripcion'];
 //                   $documento->fecha_creacion=  time(); //fecha y hora en formato int
                    $documento->adjuntos=$_POST['adjuntos'];                        
@@ -365,9 +365,11 @@ public function action_tipo($t='')
                 }
             }
             $oficina=  ORM::factory('oficinas',$this->user->id_oficina);
+            
             $oVias=  new Model_data();
             $vias=$oVias->vias($this->user->id);
-            $superior=$oVias->superior($this->user->id);            
+            $superior=$oVias->superior($this->user->id);
+            $destinatarios=$oVias->destinatarios($this->user->id);
             $tipo=  ORM::factory('tipos',$documento->id_tipo);
             $archivos=ORM::factory('archivos')->where('id_documento','=',$id)->and_where('estado','=',1)->find_all();
             $procesos=  ORM::factory('procesos')->find_all();
@@ -386,7 +388,8 @@ public function action_tipo($t='')
                                     ->bind('user',$this->user)            
                                     ->bind('options',$options)          
                                     ->bind('mensajes',$mensajes)            
-                                    ->bind('archivos',$archivos);            
+                                    ->bind('archivos',$archivos)
+                                    ->bind('destinatarios',$destinatarios);
             }
             else{
                 $this->template->content='Solo puede editar documentos creados por su usuario ';

@@ -34,17 +34,33 @@ INNER JOIN entidades AS c ON b.id_entidad = c.id WHERE a.id = '$id'");
     }
 
 	// Page footer
-	public function Footer() {
-		// Position at 15 mm from bottom
-		$this->SetY(-15);
-		// Set font
-		$this->SetFont('helvetica', 'I', 7);
-		// Page number
-		//$this->Cell(0, 10, 'Av. Mariscal Santa Cruz, Edif. Palacio de Comunicaciones Piso 20 - Telefono(2124935-40)-2124933'.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
-		$this->Cell(0, 10, 'Av. Mariscal Santa Cruz, Edif. Palacio de Comunicaciones Piso 20 - Telefono(2124935-40)-2124933, Fax: 212913 - Casilla 1868', 'T', false, 'C', 0, '', 0, false, 'T', 'M');
-                $this->Ln(2);
-		$this->Cell(0, 15, 'La Paz - Bolivia', 0, false, 'C', 0, '', 0, false, 'T', 'M');
-	}
+    public function Footer() {
+        
+        
+        $id = $_GET['id'];
+        $dbh = New db();
+        $stmt = $dbh->prepare("SELECT * FROM documentos d 
+                               INNER JOIN tipos t ON d.id_tipo=t.id
+                               INNER JOIN oficinas o ON d.id_oficina=o.id
+                               INNER JOIN entidades e ON o.id_entidad=e.id
+                               WHERE d.id='$id'");
+        $stmt->execute();
+        while ($rs = $stmt->fetch(PDO::FETCH_OBJ)) {
+            $pie1=$rs->pie_1;
+            $pie2=$rs->pie_2;
+        }
+        
+        // Position at 15 mm from bottom
+        $this->SetY(-15);
+        // Set font
+        $this->SetFont('helvetica', 'I', 7);
+        // Page number
+        
+        //$this->Cell(0, 10, 'Av. Mariscal Santa Cruz, Edif. Palacio de Comunicaciones Piso 20 - Telefono(2124935-40)-2124933, Fax: 212913 - Casilla 1868', 'T', false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Cell(0, 10, $pie1, 'T', false, 'C', 0, '', 0, false, 'T', 'M');
+        $this->Ln(2);
+        $this->Cell(0, 15, $pie2, 0, false, 'C', 0, '', 0, false, 'T', 'M');
+    }
 }
 
 // create new PDF document
@@ -147,10 +163,12 @@ try {
             $pdf->MultiCell(170,5, $rs->referencia,0,'L');
             $pdf->Ln(10);
             $pdf->writeHTML($rs->contenido);
-            $pdf->Ln(25);
-            $pdf->SetFont('Helvetica', '', 6);
-            $pdf->writeHTML('cc. ');
-            $pdf->writeHTML(strtoupper($rs->copias));
+            $pdf->Ln(10);
+            $pdf->SetFont('Helvetica', '', 5);
+            $pdf->writeHTML('cc. '.strtoupper($rs->copias));
+            $pdf->writeHTML('Adj. '.strtoupper($rs->adjuntos));
+            $pdf->writeHTML(strtoupper($rs->mosca_remitente));
+            
          /*   $pdf->SetY(-5);
 		// Set font
             $pdf->SetFont('helvetica', 'I', 7);

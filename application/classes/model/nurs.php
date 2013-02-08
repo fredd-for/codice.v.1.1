@@ -46,7 +46,7 @@ class Model_nurs extends ORM {
     //codigo de freddy
     public function correlativo_nur($a, $id_entidad) {
 
-        $sql = "SELECT SUM(correlativo) as correlativo FROM correlativo WHERE id_entidad = '$id_entidad'";
+        $sql = "SELECT SUM(correlativo) as correlativo FROM correlativo WHERE id_entidad = '$id_entidad' AND id_oficina <> 0";
         $result = DB::query(Database::SELECT, $sql)->execute()->as_array();
 
         //si existe el tipo para la entidad entonces 

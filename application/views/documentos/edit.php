@@ -243,20 +243,31 @@ echo Form::input('cargovia',$documento->cargo_via,array('id'=>'cargovia','size'=
 </p>
 </td>
 
-<td style="padding-left: 5px;" rowspan="2">
-    <?php echo Form::label('dest','Mis destinatarios:');?>
+
+
+<td rowspan="2" style="padding-left: 5px;">
+    <?php  echo Form::label('dest','Mis destinatarios:');?>
     <div id="vias">
         <ul>
-            <?php foreach($vias  as $v): ?>
-            <li class="<?php echo $v['genero']?>"><?php echo HTML::anchor('#',$v['nombre'],array('class'=>'destino','nombre'=>$v['nombre'],'title'=>$v['cargo'],'cargo'=>$v['cargo'],'via'=>$v['via'],'cargo_via'=>$v['cargo_via']));?></li>
+            
+            <!-- Vias -->    
+            
+            <!-- Destinatario -->    
+            <?php foreach($destinatarios  as $v): ?>
+            <li class="<?php echo $v['genero']?>"><?php echo HTML::anchor('#',$v['nombre'],array('class'=>'destino','nombre'=>$v['nombre'],'title'=>$v['cargo'],'cargo'=>$v['cargo'],'via'=>'','cargo_via'=>''));?></li>
             <?php endforeach; ?>
             <!-- Inmediato superior -->    
-            <?php foreach($superior  as $v){ ?>
-            <li class="<?php echo $v['genero']?>"><?php echo HTML::anchor('#',$v['nombre'],array('class'=>'destino','nombre'=>$v['nombre'],'title'=>$v['cargo'],'cargo'=>$v['cargo'],'via'=>'','cargo_via'=>''));?></li>
-            <?php } ?>
+            <?php //foreach($superior  as $v){ ?>
+            <li class="<?php //echo $v['genero']?>"><?php //echo HTML::anchor('#',$v['nombre'],array('class'=>'destino','nombre'=>$v['nombre'],'title'=>$v['cargo'],'cargo'=>$v['cargo'],'via'=>'','cargo_via'=>''));?></li>
+            <?php //} ?>
+            <!-- dependientes -->    
+            <?php// foreach($dependientes  as $v){ ?>
+            <li class="<?php // echo $v['genero']?>"><?php //echo HTML::anchor('#',$v['nombre'],array('class'=>'destino','nombre'=>$v['nombre'],'title'=>$v['cargo'],'cargo'=>$v['cargo'],'via'=>'','cargo_via'=>''));?></li>
+            <?php //} ?>
         </ul>
     </div>
 </td>
+
 
 </tr>
 

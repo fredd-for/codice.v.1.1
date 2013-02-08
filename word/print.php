@@ -41,6 +41,7 @@ $nombre_via=''.$rs->nombre_via; //para informes con via
 $cargo_via=''.$rs->cargo_via;  //para informes sin via
 $nombre_remitente=''.$rs->nombre_remitente;
 $cargo_remitente=''.$rs->cargo_remitente;
+
 //$imagen_file = $imagen_file2;
 
 $xfecha=Date('Y-m-d');
@@ -56,6 +57,10 @@ $fecha = $xdia. ' de '. $meses[$xmes] . ' de '. $xanio;
 $referencia=''.$rs->referencia;
 $hojaruta=''.$rs->nur;
 $copias=''.$rs->copias;
+
+$adjuntos=''.$rs->adjuntos;
+$mosca_remitente=''.$rs->mosca_remitente;
+
 $contenido=strip_tags(html_entity_decode(''.$rs->contenido));
 
 //logo

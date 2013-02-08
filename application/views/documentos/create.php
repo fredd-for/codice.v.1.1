@@ -84,7 +84,7 @@ $('#crear').click(function(){
 </script>
 <h2 class="subtitulo">Crear <?php echo $documento->tipo;?> <br/><span>LLENE CORRECTAMENTE LOS DATOS EN EL FORMULARIO</span></h2>
 <div class="formulario">
-    <form action="/documento/crear/<?php echo $documento->action;?>" method="post" id="frmCreate">
+    <form action="/codice2/documento/crear/<?php echo $documento->action;?>" method="post" id="frmCreate">
     <br/>
     <fieldset> 
         <legend>Proceso: <?php echo Form::select('proceso', $options, NULL);?></legend>
@@ -163,7 +163,7 @@ echo Form::input('cargovia','',array('id'=>'cargovia','size'=>40));
 </td>
 <?php if($documento->via>-10){ ?>
 <td rowspan="2" style="padding-left: 5px;">
-    <?php // echo Form::label('dest','Mis destinatarios:');?>
+    <?php  echo Form::label('dest','Mis destinatarios:');?>
     <div id="vias">
         <ul>
             
