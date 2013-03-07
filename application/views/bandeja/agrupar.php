@@ -21,21 +21,25 @@ $(function(){
 
 </script>
 <h2 class="subtitulo">Agrupar correspondencia<br/><span>Seleccione la hoja de ruta que sera la principal</span></h2>
-<form method="post" action="/bandeja/agruparf" id="frmArchivar"> 
+<form method="post" action="/codice/bandeja/agruparf" id="frmArchivar"> 
 <table style="margin: 0 auto;">
 <tr>
 <td valign="top" style=" width: 250px; padding-right: 10px; border-right: 1px solid #ccc;border-left: 1px solid #ccc; font-size: 12px; text-align: center; " >
-    Hojas de ruta a disponibles:
+    Hojas de ruta disponibles:
     <hr/><br/>
    
 <ul>
-<?php foreach($nurs as $k=>$v): ?>
+<?php 
+$c=1;
+foreach($nurs as $k=>$v): ?>
 <li>
     <?php echo $v;?>  
-    <input type="radio" value="<?php  echo $k;?>" name="principal"/>    
+    <input type="radio" value="<?php  echo $k;?>" name="principal" <?php if($c==1){ echo 'checked';}?>/>    
     <input type="hidden" value="<?php echo $k;?>" name="seg[]"/>    
 </li>
-<?php endforeach;?>
+<?php 
+$c++;
+endforeach;?>
 </ul>
     <hr/><br/> 
 <?php  echo Form::input('submit', '  Agrupar',array('type'=>'submit','class'=>'uiButton','id'=>'list')); ?>       

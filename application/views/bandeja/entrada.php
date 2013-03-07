@@ -139,14 +139,20 @@ $('a.link2').click(function(){
 				<h2 class="referencia"><a href="/documento/detalle/<?php echo $s->id_doc?>"style="color:#366FB0;"><?php echo $s->referencia; ?></a></h2>
 				<span class="oficina">Procedencia: <b><?php echo $s->de_oficina;?></b><span><br/>
 				<span class="remite">Remite: <?php echo $s->nombre_emisor; ?> | <b><?php echo $s->cargo_emisor; ?></b></span><br/>
-				<span class="accion"><?php echo $s->accion;?></span><br/>                                
-				<br/> 				
+				<span class="accion"><?php echo $s->accion;?></span><br/>
+                                <br/> 				
                                 </div>
 			</td>            
             <td class="derecha" valign="top">
                                 <div>
                                     <span><?php echo Date::fecha($s->fecha);?></span><br/><br/>
-                                    <span><b>Proveido: </b><?php echo $s->proveido;?></span>
+                                    <span><b>Proveido: </b><?php echo $s->proveido;?></span><br/>
+                                    <span><b>Archivo Adj.: </b>
+                                        <?php foreach ($archivos as $a) { ?>
+                                        <br><a href="/descargar.php?id=<?php echo $a->id;?>" style="color: #1C4781; text-decoration: underline;  "><?php echo substr($a->nombre_archivo,13);?></a>            
+                                             <?php   } ?>
+                                    </span>
+                                    
                                 </div>
             </td>            
          </tr>

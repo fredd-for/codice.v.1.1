@@ -28,7 +28,13 @@ function ajaxs(oficial)
         var estado=$('#estado').val();  
         var document=$('#document').val();  
         var adjunto=$('#adjunto').val();
-        var tipo=$('#oficial').val();        
+        var tipo=$('#oficial').val();
+        
+        var id_tipo=$('#id_tipo').val();
+        if(id_tipo==5){
+            destinatario = 119;     // usuario creado, como usuario externo
+        }
+
         var urgente=$('input:checkbox#urgente').attr('checked');
         if(urgente==undefined)
             urgente=0;
@@ -37,11 +43,12 @@ function ajaxs(oficial)
         if(adjunto==null)
           {adjunto=0;}
         var nur=$('#nur').val();        
+        if(proveido){
         visible('Derivando...');
         $.ajax({
 	            type: "POST",
 	            data: { tipo: tipo, oficial:oficial, destino: destinatario, adjunto : adjunto, document: document, nur : nur, accion: accion, proveido: proveido, hijo: hijo, user: user, adjunto:adjunto,id_seg:id_seg,estado:estado,urgente:urgente },
-	            url: "/ajax/derivar",
+	            url: "/codice/ajax/derivar",
 	            dataType: "json",
 	            success: function(item)
 	            {   
@@ -53,12 +60,14 @@ function ajaxs(oficial)
                                    adjunto=adjunto+v+"<br/>";
                                });
                                if(item.oficial=="0")
-                                {                                
-                                $('#theTable tbody').append('<tr class="oficial0"><td rowspan="2" ><input type="checkbox" title="Quitar destinatario" id="'+item.id+'" destino="'+item.id_destino+'" oficial="'+item.oficial+'" /></td><td rowspan="2"><b>COPIA</b></td><td>'+item.receptor_nombre+'<br/><b>'+item.receptor_cargo+'</b></td><td>'+accion_texto+'<br/></td><td><b>'+adjunto+'</b></td></tr><tr class="oficial0"><td colspan="3"><b>Provedido: </b>'+item.proveido+'</td></tr>');
+                                {    
+                                    
+                                //<img src="../../media/images/delete.png" width="16" height="16" alt="Quitar destinatario" style="cursor: pointer" id="'+item.id+'" destino="'+item.id_destino+'" oficial="'+item.oficial+'"/>                         
+                                $('#theTable tbody').append('<tr class="oficial0"><td rowspan="2" ><input type="checkbox" title="Quitar destinatario" id="'+item.id+'" destino="'+item.id_destino+'" oficial="'+item.oficial+'"/></td><td rowspan="2"><b>COPIA</b></td><td>'+item.receptor_nombre+'<br/><b>'+item.receptor_cargo+'</b></td><td>'+accion_texto+'<br/></td><td><b>'+adjunto+'</b></td></tr><tr class="oficial0"><td colspan="3"><b>Proveido: </b>'+item.proveido+'</td></tr>');
                                 }
                                 else
                                 {
-                                $('#theTable tbody').append('<tr class="oficial1"><td rowspan="2" ><input type="checkbox" title="Quitar destinatario" id="'+item.id+'" destino="'+item.id_destino+'" oficial="'+item.oficial+'"/></td><td rowspan="2"><b>OFICIAL</b></td><td>'+item.receptor_nombre+'<br/><b>'+item.receptor_cargo+'</b></td><td>'+accion_texto+'<br/></td><td><b>'+adjunto+'</b></td></tr><tr class="oficial1"><td colspan="3" ><b>Provedido: </b>'+item.proveido+'</td></tr>');
+                                $('#theTable tbody').append('<tr class="oficial1"><td rowspan="2" ><input type="checkbox" title="Quitar destinatario" id="'+item.id+'" destino="'+item.id_destino+'" oficial="'+item.oficial+'"/></td><td rowspan="2"><b>OFICIAL</b></td><td>'+item.receptor_nombre+'<br/><b>'+item.receptor_cargo+'</b></td><td>'+accion_texto+'<br/></td><td><b>'+adjunto+'</b></td></tr><tr class="oficial1"><td colspan="3" ><b>Proveido: </b>'+item.proveido+'</td></tr>');
                                 }
                             }
                          else
@@ -69,6 +78,7 @@ function ajaxs(oficial)
 	           },
                    error:function(){ ocultar();}
           });
+          }else{alert("Ingrese Proveido..."); $("#proveido").focus();}
     } 
     
 $(function() {
@@ -96,6 +106,12 @@ $('#dCopia').bind('click',function(){
     ajaxs(0);
     return false;
 });
+$('#dExterna').bind('click',function(){
+            if (confirm('Esta Seguro de Realizar la Derivacion Externa ?')) {
+                ajaxs(1);
+                return false;
+            }
+        });
 $("#adjunto").fcbkcomplete({
     json_url: "/ajax/documentos",
                     addontab: true,                   
@@ -114,7 +130,7 @@ $('table#theTable :checkbox').live("click",function(){
         $.ajax({
 	            type: "POST",
 	            data: { id: id, destino: destino,oficial:oficial,document : document },
-	            url: "/ajax/eliminar",
+	            url: "/codice/ajax/eliminar",
 	            dataType: "json",
 	            success: function(item)
 	            {   
@@ -183,8 +199,10 @@ $('#eliminar').click(function(){
 <input type="hidden" value="<?php echo $documento->estado;?>" name="estado" id="estado"/>
 <input type="hidden" value="<?php echo $user->id;?>" name="user" id="user"/>
 <input type="hidden" value="<?php echo $documento->id;?>" name="document" id="document"/>
+<input type="hidden" value="<?php echo $documento->id_tipo;?>" name="id_tipo" id="id_tipo"/>
 <fieldset>
-    <div style="height:3px; background:#184D9C; "></div>    
+    <div style="height:3px; background:#184D9C; "></div>
+
 <table style="width: 100%;">
     <tbody>                                                       
         <tr>                   
@@ -252,12 +270,15 @@ $('#eliminar').click(function(){
                 <?php if($oficial!=0): ?>                
                 <a href="#"   id="dOficial" class="uiButton uiButtonConfirm"><img src="/media/images/derivar.png" alt="" align="absmiddle"/> Derivar Oficial</a>
                <?php endif;?>
-                <a href="#" id="dCopia" class="uiButton"><img src="/media/images/derivar.png" alt="" align="absmiddle"/> Derivar Copia</a>                               
+                <a href="#" id="dCopia" class="uiButton"><img src="/media/images/derivar.png" alt="" align="absmiddle"/> Derivar Copia</a>
+                <?php if($documento->id_tipo == 5):?>
+                <a href="#" id="dExterna" class="uiButton"><img src="/media/images/derivar.png" alt="" align="absmiddle"/> Derivaci&oacute;n Externa</a>
+                <?php endif;?>
             </td>
             <td align="right">                
-                <?php if($documento->estado==0):?>
+                <?php //if($documento->estado==0):?>
                 <a href="/print_hr.php?nur=<?php echo $documento->nur;?>" target="_blank" class="uiButton"><img src="/media/images/printer.png" alt="" align="absmiddle"/> Imprimir HR</a>                
-                <?php endif;?>
+                <?php //endif;?>
             </td>
         </tr>
 </table>

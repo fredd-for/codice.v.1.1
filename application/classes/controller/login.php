@@ -37,7 +37,11 @@ class Controller_login extends Controller_Mintemplate{
                     $session=Session::instance();
                     $session->set('username',$usuario->nombre);
                     $session->set('username',$usuario->username);
-                    $session->set('cargo',$usuario->cargo);                    
+                    $session->set('cargo',$usuario->cargo);
+                    
+                    $entidad = ORM::factory('entidades', $usuario->id_entidad);
+                    $session->set('entidad',$entidad->entidad);
+                    $session->set('sigla',$entidad->sigla);
                     //vitacora
                     $this->save($usuario->id_entidad,$usuario->id, $usuario->nombre.' <b>'.$usuario->cargo.'</b> ingresó al sistema');
                     

@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Installation directory
-RewriteBase /codice2/
+RewriteBase /codice/
 
 # Protect hidden files from being viewed
 <Files .*>

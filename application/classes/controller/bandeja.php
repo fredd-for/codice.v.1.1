@@ -36,10 +36,20 @@ class Controller_Bandeja extends Controller_DefaultTemplate{
     {        
             $oSeg=New Model_Seguimiento();
             $entrada=$oSeg->estado(1,$this->user->id);
+            $id_doc =0;
+            foreach ($entrada as $e) {
+                $id_doc = $e->id_doc;
+            }
+            
+            $archivos = ORM::factory('archivos')
+    ->where('id_documento', '=', $id_doc)
+    ->find_all();
+            
             $this->template->styles=array('media/css/tablas.css'=>'all','media/css/modal.css'=>'screen');
             $this->template->title     .= ' | Entrada'; 
             $this->template->content=View::factory('bandeja/entrada')
-                                    ->bind('norecibidos', $entrada); 
+                                    ->bind('norecibidos', $entrada)
+                                    ->bind('archivos', $archivos);
     }
     public function action_doa()    
     {
@@ -211,6 +221,14 @@ class Controller_Bandeja extends Controller_DefaultTemplate{
             {
             $oSeg=New Model_Seguimiento();
             $entrada=$oSeg->pendiente($user->id);
+            $id_doc =0;
+            foreach ($entrada as $e) {
+                $id_doc = $e->id_doc;
+            }
+            $archivos = ORM::factory('archivos')
+            ->where('id_documento', '=', $id_doc)
+            ->find_all();
+            
             $carpetas=ORM::factory('carpetas')->where('id_oficina','=',$user->id_oficina)->find_all();
             $arrCarpetas=array();
             foreach($carpetas as $c)
@@ -230,6 +248,7 @@ class Controller_Bandeja extends Controller_DefaultTemplate{
                                     ->bind('entrada', $entrada)
                                     ->bind('carpetas', $arrCarpetas)
                                     ->bind('user', $user)
+                                    ->bind('archivos', $archivos)
                                     ->bind('options',$options);     
                 
             }
@@ -240,8 +259,15 @@ class Controller_Bandeja extends Controller_DefaultTemplate{
         }    
         else
         {    
+            $id_doc =0;
             $oSeg=New Model_Seguimiento();
             $entrada=$oSeg->pendiente($this->user->id);
+            foreach ($entrada as $e) {
+                $id_doc = $e->id_doc;
+            }
+            $archivos = ORM::factory('archivos')
+            ->where('id_documento', '=', $id_doc)
+            ->find_all();
             $carpetas=ORM::factory('carpetas')->where('id_oficina','=',$this->user->id_oficina)->find_all();
             $arrCarpetas=array();
             foreach($carpetas as $c)
@@ -260,6 +286,7 @@ class Controller_Bandeja extends Controller_DefaultTemplate{
             $this->template->content=View::factory('bandeja/pendientes')
                                     ->bind('entrada', $entrada)
                                     ->bind('carpetas', $arrCarpetas)
+                                    ->bind('archivos', $archivos)
                                     ->bind('options',$options);     
         }
     }
@@ -280,7 +307,9 @@ class Controller_Bandeja extends Controller_DefaultTemplate{
         if(sizeof($carpeta)>0)
         {
             $user=$this->user;
-            $this->template->styles=array('media/css/tablas.css'=>'all'); 
+            
+            $this->template->styles=array('media/css/tablas.css'=>'all');
+            $this->template->scripts    = array('media/js/jquery.tablesorter.min.js');
             $this->template->title.=' | '.$carpeta[0]['carpeta'];
             $this->template->content=View::factory('bandeja/carpeta')
                                         ->bind('carpeta',$carpeta)

@@ -9,10 +9,10 @@ class db extends PDO {
    
     public function __construct(){
         $this->engine = 'mysql';
-        $this->host = 'bd01';
+        $this->host = 'localhost';
         $this->database = 'correspondencia';
-        $this->user = 'desarrollo';
-        $this->pass = 'd3s4rr0ll02k12';
+        $this->user = 'correspondencia';
+        $this->pass = 'c0rr3sp0nd3nc14';
         $dns = $this->engine.':dbname='.$this->database.";host=".$this->host;
         parent::__construct( $dns, $this->user, $this->pass );
     }

@@ -132,7 +132,7 @@ $('a.close, #fade, #cancelar').live('click', function(){ //When clicking on the 
                 <?php if($n['estado']):?>
                 <a href="/seguimiento/?nur=<?php echo $n['nur'];?>" title="Ver seguimiento del NUR <?php echo $n['nur'] ?>" >Derivado</a>                
                 <?php else: ?>
-                <a href="/hojaruta/derivar/?nur=<?php echo $n['nur'];?>" title="Derivar <?php echo $n['nur'] ?>" ><img src="/media/images/deriv.png"/></a>
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $n['id_documento'];?>" title="Derivar <?php echo $n['nur'] ?>" ><img src="/media/images/deriv.png"/></a>
                 <a href="#?w=350" class="poplight" rel="popup_name" title="Crear documento a partir del NUR <?php echo $n['nur'];?>" id_nur="<?php echo $n['id_documento'];?>" id_seg="0" nuri="<?php echo $n['nur'];?>"><img src="/media/images/kword_kwd.png" /></a>  
                 <?php endif;?>                
             </td>        

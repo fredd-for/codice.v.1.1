@@ -61,7 +61,9 @@ $copias=''.$rs->copias;
 $adjuntos=''.$rs->adjuntos;
 $mosca_remitente=''.$rs->mosca_remitente;
 
-$contenido=strip_tags(html_entity_decode(''.$rs->contenido));
+//  $contenido=strip_tags(html_entity_decode(''.$rs->contenido));       // original
+$contenido=''.$rs->contenido;
+
 
 //logo
 $data=array();
@@ -70,7 +72,8 @@ $data[]=array('number'=>'../media/logos/'.$rs->logo);
 $pie_1=''.$rs->pie_1;
 $pie_2=''.$rs->pie_2;
 // Load the template
-$TBS->LoadTemplate($template);
+//$TBS->LoadTemplate($template);
+$TBS->LoadTemplate($template,OPENTBS_ALREADY_UTF8);
 $TBS->MergeBlock('a,b', $data);
 
 // delete comments

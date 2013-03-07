@@ -2,6 +2,19 @@
 include('db/dbclass.php');
 $dbh=New db();
 $nur=$_GET['nur'];
+
+        $stmt = $dbh->prepare("SELECT c.logo FROM documentos AS a INNER JOIN oficinas AS b ON a.id_oficina = b.id
+INNER JOIN entidades AS c ON b.id_entidad = c.id WHERE a.nur = '$nur'");
+        $stmt->execute();
+        //echo "<B>outputting...</B><BR>";
+        $image_file = 'logo.jpg';
+        while ($rs2 = $stmt->fetch(PDO::FETCH_OBJ)) {
+            if ($rs2->logo) {
+                $image_file = 'media/logos/' . $rs2->logo;
+            }
+        }
+
+        
 $stmt = $dbh->prepare("SELECT * FROM agrupaciones a INNER  JOIN nurs n ON a.padre=n.nur WHERE a.padre='$nur'");        
 $stmt->execute();        
 $padre =  $stmt->fetch(PDO::FETCH_OBJ);   
@@ -9,11 +22,11 @@ $padre =  $stmt->fetch(PDO::FETCH_OBJ);
     require('libs/fpdf17/code39.php');
     $pdf = new PDF_Code39('P','mm','Letter');
     $pdf->AddPage();    
-    $pdf->SetFont('Arial', '', 18);    
+    $pdf->SetFont('Arial', '', 25);    
     $pdf->SetXY(30,20);
     $pdf->Cell(155, 10, 'CARATULA DE AGRUPACION', 1,FALSE,'C'); 
     $pdf->Ln();
-    $image_file = 'media/images/logo_MDPyEP.png';
+   // $image_file = 'media/images/logo_MDPyEP.png';
     $pdf->Image($image_file, 85, 32, 43, 25, 'png', '', '', FALSE, 200, '', FALSE, FALSE, 1);
     $pdf->SetXY(30,30);
     $pdf->Cell(155, 25, '', 'LR',FALSE,'C'); 
@@ -45,6 +58,7 @@ $padre =  $stmt->fetch(PDO::FETCH_OBJ);
     $pdf->Cell(175, 10, 'HOJA(S) DE RUTA AGRUPADO(S)', 1,FALSE,'C'); 
     $pdf->Ln();
     $pdf->SetX(20);
+    $pdf->SetFont('Arial', '', 7);   
     $pdf->SetFillColor(240,245,255);
     $pdf->Cell(25, 5, 'HOJA  RUTA', 1,FALSE,'C',TRUE); 
     $pdf->Cell(28, 5, 'F. CREACION', 1,FALSE,'C',TRUE); 

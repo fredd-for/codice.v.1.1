@@ -57,7 +57,7 @@ $(function(){
     foreach ($pendientes as $d): ?>
         <tr>
             <td style="text-align: right;" >
-                <a href="/hojaruta/derivar/?nur=<?php echo $d['nur'];?>"><?php echo $d['nur'];?></a>            
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $d['id'];?>"><?php echo $d['nur'];?></a>            
             </td>
             <td class="codigo" align="center">
                 <a href="/documento/detalle/?id=<?php echo $d['id'];?>" ><?php echo $d['cite_original'];?></a>               
@@ -78,7 +78,7 @@ $(function(){
                 </td> 
             <td style="text-align: right;" >
                 <a href="/ventanilla/editar/<?php echo $d['id'];?>" title="Editar documento" ><img src="/media/images/edit.png"/></a>              
-                <a href="/hojaruta/derivar/?nur=<?php echo $d['nur'];?>" title="Derivar" ><img src="/media/images/derivar.png"/></a>            
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $d['id'];?>" title="Derivar" ><img src="/media/images/derivar.png"/></a>            
             </td>             
         </tr>        
     <?php endforeach; ?>

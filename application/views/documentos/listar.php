@@ -59,7 +59,7 @@ $(function(){
             <td ><?php echo $d->referencia;?></td>
             <td ><b><?php echo $d->nombre_destinatario;?></b><br/><?php echo $d->cargo_destinatario;?></td>
             <td align="right" valign="center" >
-                <a href="/hojaruta/derivar/?nur=<?php echo $d->nur;?>"><?php echo $d->nur;?></a>            
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $d->id;?>"><?php echo $d->nur;?></a>            
             </td>
             <td align="right" valign="center" ><?php echo Date::fecha_corta($d->fecha_creacion); ?>
              </td> 
@@ -67,7 +67,7 @@ $(function(){
                 <?php if($d->estado==1):?>                
                 <a href="/seguimiento/?nur=<?php echo $d->nur;?>" title="Ver seguimiento" >Derivado</a>
                 <?php else: ?>                
-                <a href="/hojaruta/derivar/?nur=<?php echo $d->nur;?>" title="Derivar" ><img src="/media/images/derivar.png"/></a>          
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $d->id;?>" title="Derivar" ><img src="/media/images/derivar.png"/></a>          
                 <?php endif;?>
                 <a href="/documento/editar/<?php echo $d->id;?>" title="Editar documento" ><img src="/media/images/edit.png"/></a>                                  
             </td>             

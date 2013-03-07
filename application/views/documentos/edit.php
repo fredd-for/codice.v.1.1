@@ -33,7 +33,7 @@ $('div.tabs ul.tabNavigation a').click(function(){
 }).filter(':first').click();
     
     
-//$('#frmCreate').validate();
+$('#frmEditar').validate();
     var config={
     toolbar : [ ['Maximize','Preview','SelectAll','Cut', 'Copy','Paste', 'Pagebreak','PasteFromWord','PasteText','-','Bold','Italic','Underline','FontSize','Font','TextColor','BGColor',,'NumberedList','BulletedList'],
                 ['Undo','Redo','-','SpellChecker','Scayt','-','Find','Replace','-','Table','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock']]
@@ -162,12 +162,12 @@ div.si label.selectedFile {
  <?php if($documento->estado==1):?> 
  <a href="/seguimiento/?nur=<?php echo $documento->nur; ?>" class="link derivar" title="Ver seguimiento" >Derivado</a>      
  <?php else: ?>
- <a href="/hojaruta/derivar/?nur=<?php echo $documento->nur; ?>" class="link derivar" title="Derivar a partir del documento, si ya esta derivado muestra el seguimiento" >Derivar</a>      
+ <a href="/hojaruta/derivar/?id_doc=<?php echo $documento->id; ?>" class="link derivar" title="Derivar a partir del documento, si ya esta derivado muestra el seguimiento" >Derivar</a>      
  <?php endif;?>
  |  <a href="/word/print.php?id=<?php echo $documento->id; ?>" class="link word" target="_blank" title="Editar este documento en word" >Editar en Word</a>       
 
 </div>
-    <form action="/documento/editar/<?php echo $documento->id;?>" method="post" id="frmEditar" >  
+    <form action="/codice/documento/editar/<?php echo $documento->id;?>" method="post" id="frmEditar" >  
 <?php if(sizeof($mensajes)>0):?>
 <div class="info">
     <p><span style="float: left; margin-right: .3em;" class="ui-icon-info"></span>
@@ -177,10 +177,27 @@ div.si label.selectedFile {
 </div>
 <?php endif;?>        
         <br/>
-    <fieldset> <legend>Proceso: <?php echo Form::select('proceso', $options, $documento->id_proceso);?></legend>
+<?php if($documento->id_tipo==5):
+    echo Form::hidden('proceso',1);
+else:?>        
+        <fieldset> <legend>Proceso: <?php echo Form::select('proceso', $options, $documento->id_proceso);?></legend>
+<?php endif;?>            
 <table width="100%">
 <tr>
 <td style=" border-right:1px dashed #ccc; padding-left: 5px;">
+<?php if($documento->id_tipo=='5'):?>
+<p>
+<label>Titulo:</label>
+<select name="titulo" class="required">
+    <option></option>
+    <option <?php if($documento->titulo=='Señor') { echo 'selected';} ?> >Señor</option>
+    <option <?php if($documento->titulo=='Señora') { echo 'selected';} ?>>Señora</option>
+    <option <?php if($documento->titulo=='Señores') { echo 'selected';} ?>>Señores</option>    
+</select>
+</p>
+<?php else:?>
+<input type="hidden" name="titulo" />   
+<?php endif;?>    
 <p>
 <?php
 echo Form::hidden('id_doc',$documento->id);   
@@ -207,11 +224,11 @@ echo Form::input('cargo_des',$documento->cargo_destinatario,array('id'=>'cargo_d
 <p>
 <?php
 echo Form::label('via', 'Via:',array('class'=>'form'));
-echo Form::input('via',$documento->nombre_via,array('id'=>'via','size'=>45,'class'=>'required'));
+echo Form::input('via',$documento->nombre_via,array('id'=>'via','size'=>45/*,'class'=>'required'*/));
 ?>
 <?php
 echo Form::label('cargovia', 'Cargo Via:',array('class'=>'form'));
-echo Form::input('cargovia',$documento->cargo_via,array('id'=>'cargovia','size'=>45,'class'=>'required'));
+echo Form::input('cargovia',$documento->cargo_via,array('id'=>'cargovia','size'=>45/*,'class'=>'required'*/));
 ?>
     <?php endif;?>
 
@@ -234,11 +251,11 @@ echo Form::input('cargovia',$documento->cargo_via,array('id'=>'cargovia','size'=
 ?>
 <?php
    echo Form::label('adjuntos', 'Adjunto:',array('class'=>'form'));
-   echo Form::input('adjuntos',$documento->adjuntos,array('id'=>'adjuntos','size'=>45,'class'=>'required','title'=>'Ejemplo: Lo citado'));
+   echo Form::input('adjuntos',$documento->adjuntos,array('id'=>'adjuntos','size'=>45/*,'class'=>'required','title'=>'Ejemplo: Lo citado'*/));
 ?>
 <?php
             echo Form::label('copias', 'Con copia a:',array('class'=>'form'));
-            echo Form::input('copias',$documento->copias,array('id'=>'adjuntos','size'=>45,'class'=>'required'));
+            echo Form::input('copias',$documento->copias,array('id'=>'adjuntos','size'=>45/*,'class'=>'required'*/));
             ?>
 </p>
 </td>
@@ -276,7 +293,7 @@ echo Form::input('cargovia',$documento->cargo_via,array('id'=>'cargovia','size'=
 <?php
 echo Form::label('referencia', 'Referencia:',array('class'=>'form'));
 ?>
-    <textarea name="referencia" id="referencia" style="width: 525px;"><?php echo $documento->referencia?></textarea>
+    <textarea name="referencia" id="referencia" style="width: 510px;" class="required"><?php echo $documento->referencia?></textarea>
 </td>
 </tr>
 <tr>

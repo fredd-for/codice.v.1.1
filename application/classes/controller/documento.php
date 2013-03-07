@@ -331,6 +331,7 @@ public function action_tipo($t='')
                    $documento->copias=$_POST['copias'];
                    $documento->nombre_via=$_POST['via'];                        
                    $documento->cargo_via=$_POST['cargovia'];
+                   $documento->titulo=$_POST['titulo'];
                    $documento->id_proceso=$_POST['proceso'];
                    $documento->save();
                    $mensajes['Modificado!']='El documento se modifico correctamente.';

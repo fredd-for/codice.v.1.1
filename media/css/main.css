@@ -12,7 +12,7 @@ img,a img {border: 0;text-decoration: none;}
 #modx-navbar {background: -webkit-gradient(linear, left bottom, left top, color-stop(0.37, #555),color-stop(0.69, #666), color-stop(0, #555) );}
 */
 #modx-login-user {font-weight: bold;text-decoration: none;color: #ccc;}
-#rightlogin {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #4E4E4E;bottom: 10px;color: #AAA;height: 26px;line-height: 26px;max-width: 350px;position: absolute;right: 12px;z-index: 1;}
+#rightlogin {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #4E4E4E;bottom: 10px;color: #AAA;height: 26px;line-height: 26px;max-width: 365px;position: absolute;right: 12px;z-index: 1;}
 #rightlogin span {-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;background-color: #565656;border: 1px solid #1F1F1F;float: left;height: 26px;padding: 0 0 0 12px;}
 #rightlogin a.modx-logout {-moz-border-radius-topright: 2px;-moz-border-radius-bottomright: 2px;-webkit-border-top-right-radius: 2px;-webkit-border-bottom-right-radius: 2px;border-top-right-radius: 2px;border-bottom-right-radius: 2px;background-color: #3E3E3E;border: 1px solid #4E4E4E;color: #DDD;display: block;float: right;height: 24px;margin: 0 0 1px 7px;padding: 0 12px;text-decoration: none;text-shadow: 1px -1px 0 #5E5E5E;}
 #rightlogin a.modx-logout:hover {background-color: #175997;border: 1px solid #3D73AA;text-shadow: none;}

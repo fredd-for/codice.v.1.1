@@ -1,18 +1,43 @@
 <script type="text/javascript">
-$(function()
-{
- $("#theTable").tablesorter({sortList:[[3,1]], 
-                widgets: ['zebra'],
-                headers: {             
-                    5: { sorter:false},
-                    6: { sorter:false}
-                }
-            });
-});//document.ready
+    $(function()
+    {
+        $("#theTable").tablesorter({sortList:[[3,1]], 
+            widgets: ['zebra'],
+            headers: {             
+                5: { sorter:false},
+                6: { sorter:false}
+            }
+        });
+        
+        //add index column with all content.
+ $("table#theTable tbody tr:has(td)").each(function(){
+   var t = $(this).text().toLowerCase(); //all row text
+   $("<td class='indexColumn'></td>")
+    .hide().text(t).appendTo(this);
+ });//each tr
+
+        
+        $("#FilterTextBox").keyup(function(){
+            var s = $(this).val().toLowerCase().split(" ");
+            //show all rows.
+            $("#theTable tbody tr:hidden").show();
+            $.each(s, function(){
+                $("#theTable tbody tr:visible .indexColumn:not(:contains('"
+                    + this + "'))").parent().hide();
+            });//each
+        });//key up.
+        //zebra
+        
+        $("#FilterTextBox").focus();
+        
+        
+    });//document.ready
 </script>
+
 
 <h2 class="subtitulo">Seguimiento<br/> <span>Lista de hojas de ruta enviadas recientemente</span></h2>
 <?php if(sizeof($results)>0):?> 
+<p style="margin: 5px auto;"> <b>Filtrar/Buscar: </b><input type="text" id="FilterTextBox" name="FilterTextBox" size="40" /></p>
 <table id="theTable" class="tablesorter">
     <thead>
         <tr>

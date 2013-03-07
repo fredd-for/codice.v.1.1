@@ -192,8 +192,8 @@ input[type="text"]{line-height: 20px; height: 20px; font-size: 14px;}
             <td> <?php echo $s->accion; ?></td>
             <td><b>Documento: </b> <?php echo $s->codigo; ?></td>
                 <td align="right">
-                    <a href="#?w=350" class="poplight" rel="popup_name" title="Responder al nuri <?php echo $s->nur;?>" id_nur="<?php echo $s->id_nur;?>" id_seg="<?php echo $s->id;?>" nuri="<?php echo $s->nur?>"><img src="/media/images/24/outbox.png" /></a>  
-                    <a href="/hojaruta/derivar/?id=<?php echo $s->id_nur;?>" title="Derivar" id_nur="<?php echo $s->id_nur;?>" id_seg="<?php echo $s->id;?>" nuri="<?php echo $s->nur?>"><img src="/media/images/document--arrow.png" /></a>  
+                    <a href="#?w=350" class="poplight" rel="popup_name" title="Responder al nuri <?php echo $s->nur;?>" id_nur="<?php echo $s->id_doc;?>" id_seg="<?php echo $s->id;?>" nuri="<?php echo $s->nur?>"><img src="/media/images/24/outbox.png" /></a>  
+                    <a href="/hojaruta/derivar/?id_doc=<?php echo $s->id_doc;?>" title="Derivar" id_nur="<?php echo $s->id_doc;?>" id_seg="<?php echo $s->id;?>" nuri="<?php echo $s->nur?>"><img src="/media/images/document--arrow.png" /></a>  
                     <a href="/hojaruta/archivar/<?php echo $s->id;?>" title="Archivar hoja de ruta" ><img src="/media/images/folders.jpg" /></a>                  
                 </td>
         </tr>

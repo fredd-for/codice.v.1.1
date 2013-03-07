@@ -81,7 +81,7 @@ $(function(){
                 <a href="/seguimiento/?nur=<?php echo $d->nur;?>" title="Derivar" >Derivado</a>            
                 <?php else: ?>
                 <a href="/ventanilla/editar/<?php echo $d->id;?>" title="Editar documento" ><img src="/media/images/edit.png"/></a>          
-                <a href="/hojaruta/derivar/?nur=<?php echo $d->nur;?>" title="Derivar" ><img src="/media/images/derivar.png"/></a>            
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $d->id;?>" title="Derivar" ><img src="/media/images/derivar.png"/></a>            
                 <?php endif; ?>
                     
                 

@@ -51,8 +51,9 @@
     <td><span style="color:#414141;">Adjunto: </span></td>       
     <td colspan="3">
     <?php foreach($archivo as $a):?>
-    <?php echo substr($a->nombre_archivo,13); ?><br/> 
+    <a href="/descargar.php?id=<?php echo $a->id;?>" style="color: #1C4781; text-decoration: underline;  "><?php echo substr($a->nombre_archivo,13);?></a><br/> 
     <?php endforeach; ?>
+       
     </td>        
 </tr>
  </table>

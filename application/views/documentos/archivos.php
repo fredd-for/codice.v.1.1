@@ -67,7 +67,7 @@ $(function(){
             </td>            
             <td ><?php echo number_format($d['tamanio']/1048576,2).' MB';?></td>
             <td><b><?php echo $d['tipo'];?></b>               </td>
-            <td><a href="/documento/editar/<?php echo $d['id_documento'];?>" ><?php echo $d['codigo'];?></a>               </td>
+            <td><a href="/documento/detalle/<?php echo $d['id_documento'];?>" ><?php echo $d['codigo'];?></a>               </td>
             <td ><?php echo $d['referencia'];?></td>                        
             <td style="text-align: right;" >
                 <a href="/seguimiento/?nur=<?php echo $d['nur'];?>"><?php echo $d['nur'];?></a>            

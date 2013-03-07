@@ -18,7 +18,6 @@ $(function(){
 });
 </script>
 
-
 <h2 style="border-bottom: 1px dotted #ccc;">Crear una Oficina<br/><span>LLene correctamente los datos del siguiente formulario</span></h2>
 <?php if ($message) : ?>
     <h3 class="message">

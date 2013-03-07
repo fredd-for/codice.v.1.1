@@ -39,7 +39,7 @@ class Controller_Vista extends Controller_MinimoTemplate{
                     ->find();
         if($documento->loaded()){
             $seguimiento=ORM::factory('seguimiento')->where('id','=',$id_seg)->find();
-            if($seguimiento->derivado_a==$this->user->id||$seguimiento->derivado_por==$this->user->id||$this->user->prioridad==1)
+            if($seguimiento->derivado_a==$this->user->id || $seguimiento->derivado_por==$this->user->id || $this->user->prioridad==1)
             {
             $archivo=ORM::factory('archivos')->where('id_documento','=',$documento->id)->find();
 

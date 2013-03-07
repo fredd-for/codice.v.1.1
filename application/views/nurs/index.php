@@ -61,7 +61,7 @@ $(function()
                 <?php if($n->estado):?>
                 <a href="/seguimiento/?nur=<?php echo $n->nur;?>" title="Ver seguimiento del NUR <?php echo $n->nur; ?>" >Derivado</a>                
                 <?php else: ?>
-                <a href="/hojaruta/derivar/?nur=<?php echo $n->nur;?>" title="Derivar <?php echo $n->nur; ?>" ><img src="/media/images/deriv.png"/></a>                
+                <a href="/hojaruta/derivar/?id_doc=<?php echo $n->id;?>" title="Derivar <?php echo $n->nur; ?>" ><img src="/media/images/deriv.png"/></a>                
                 <?php endif;?>                
             </td>        
             <td>

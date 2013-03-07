@@ -2,6 +2,7 @@
 <script type="text/javascript">    
 $(function(){        
 //incluir destinatario
+$('#frmCreate').validate();
 $('a.destino').click(function(){
     var nombre=$(this).attr('nombre');   
     var cargo=$(this).attr('cargo');   
@@ -30,7 +31,7 @@ $('#crear').click(function(){
 <h2 class="subtitulo">Editar: <?php echo $documento->nur;?><br/><span>Recepcion de documentos externos</span></h2>
 <a href="/ventanilla" class="uiButton uiButtonConfirm" title="Imprimir hoja de ruta" style="color:#fff;"><img src="/media/images/doc.png" align="absmiddle" alt="" /> RECEPCIONAR OTRO</a>
 <a href="/print_hr.php?nur=<?php echo $documento->nur; ?>" class="uiButton" title="Imprimir hoja de ruta" ><img src="/media/images/printer.png" align="absmiddle" alt="" /> HOJA DE RUTA</a>
-<a href="/hojaruta/derivar/?nur=<?php echo $documento->nur; ?>" class="uiButton" title="Derivar a partir del documento, si ya esta derivado muestra el seguimiento" ><img src="/media/images/users.png" align="absmiddle" alt="" /> Derivar Doc</a>
+<a href="/hojaruta/derivar/?id_doc=<?php echo $documento->id; ?>" class="uiButton" title="Derivar a partir del documento, si ya esta derivado muestra el seguimiento" ><img src="/media/images/users.png" align="absmiddle" alt="" /> Derivar Doc</a>
 <hr/>
 <?php if(sizeof($error)>0):?>
 <div class="error">
@@ -109,7 +110,7 @@ echo Form::input('cargorem',$documento->cargo_remitente,array('id'=>'cargorem','
 <?php
 echo Form::label('referencia', 'Referencia:',array('class'=>'form'));
 ?>
-    <textarea id="descripcion" name="descripcion" style="width:500px;"><?php echo $documento->referencia;?></textarea>    
+    <textarea id="descripcion" name="descripcion" style="width:500px;" class="required"><?php echo $documento->referencia;?></textarea>    
 <br/>    
 <br/>
 </td>

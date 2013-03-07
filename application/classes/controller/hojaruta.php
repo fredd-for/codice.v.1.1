@@ -96,6 +96,7 @@ class Controller_Hojaruta extends Controller_DefaultTemplate{
                 $documento->original=0; //important !!                
                 $documento->id_proceso=$proceso->id;
                 $documento->id_oficina=$this->user->id_oficina;
+                $documento->id_entidad=$this->user->id_entidad;
                 $documento->save();
                 if($documento->id){                                                                        
                                     //cazamos al documento con el nur asignado
@@ -252,11 +253,12 @@ class Controller_Hojaruta extends Controller_DefaultTemplate{
    //nueva function para derivar
     public function action_derivar()
     {
-        $nur=Arr::get($_GET,'nur',0);        
+        $id=Arr::get($_GET,'id_doc',0);        
         $documento=ORM::factory('documentos')
-                        ->where('nur','=',$nur)
-                        ->and_where('original','=',1)
+                        ->where('id','=',$id)
+                        //->and_where('original','=',1)
                         ->find();
+        $nur = $documento->nur;
         if($documento->loaded())
         {           
                 $session=  Session::instance();

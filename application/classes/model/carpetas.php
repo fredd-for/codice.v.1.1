@@ -26,7 +26,7 @@ class Model_Carpetas extends ORM{
     public function lista_carpetas()
     {
         $sql="SELECT car.id,car.carpeta,car.fecha_creacion,car.nivel,ofi.sigla,ofi.oficina
-FROM carpetas AS car INNER JOIN oficinas AS ofi ON car.id_oficina = ofi.id";
+FROM carpetas AS car LEFT JOIN oficinas AS ofi ON car.id_oficina = ofi.id";
         return db::query(Database::SELECT, $sql)->execute();
     }
 }

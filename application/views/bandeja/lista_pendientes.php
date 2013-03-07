@@ -109,7 +109,7 @@ $('a.link2').click(function(){
 </p>
 <div id="entrada">    
     <h2 style="text-align: center; color: #3263A0; ">Lista de correspondencia pendiente</h2>
-    <form action="/bandeja/doa" method="post" id="doa" >
+    <form action="/codice/bandeja/doa" method="post" id="doa" >
     <?php foreach($entrada as $s): ?>
 <div class="bandeja tipo<?php echo $s->oficial;?>" style="display:inline-block;" oficina="<?php echo $s->de_oficina?>" proceso="<?php echo $s->referencia?>"  fecha="<?php echo $s->fecha;?>" hojaruta="<?php echo $s->nur;?>">
     <table class="oficial<?php echo $s->oficial;?>">
@@ -130,7 +130,12 @@ $('a.link2').click(function(){
             <td class="derecha" valign="top">
                                 <div>
                                     <span><b>F.Recepción: </b><?php echo Date::fecha($s->fecha2);?></span><br/><br/>
-                                    <span><b>Proveido: </b><?php echo $s->proveido;?></span>
+                                    <span><b>Proveido: </b><?php echo $s->proveido;?></span><br/>
+                                    <span><b>Archivo Adj.: </b>
+                                        <?php foreach ($archivos as $a) { ?>
+                                        <br><a href="/descargar.php?id=<?php echo $a->id;?>" style="color: #1C4781; text-decoration: underline;  "><?php echo substr($a->nombre_archivo,13);?></a>            
+                                             <?php   } ?>
+                                    </span>
                                 </div>
             </td>            
          </tr>

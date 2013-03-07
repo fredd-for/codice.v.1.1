@@ -34,6 +34,7 @@
         <div id="modx-navbar">
         <div id="rightlogin">
         <span>
+            <b id="modx-login-user" title="<?php $session=Session::instance(); echo strtoupper($session->get('entidad')) ?>"><?php  $session=Session::instance(); echo $session->get('sigla'); ?></b>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
             <a href="/user/logout" title="Salir del sistema" class="modx-logout">Salir</a>
             <a href="/user/info" title="Informaci&oacute;n de Usuario" id="modx-login-user"><?php  $session=Session::instance(); $user=$session->get('auth_user'); echo $user->nombre; ?></a>
         </span>

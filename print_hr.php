@@ -9,7 +9,21 @@ INNER JOIN entidades e ON e.id=o.id_entidad
 INNER JOIN procesos p ON d.id_proceso=p.id
 WHERE d.nur='$nur'
 AND d.original='1'");        
-$stmt->execute();        
+$stmt->execute();
+
+
+$para = $dbh->prepare("SELECT s.nombre_receptor,s.accion,s.proveido
+FROM seguimiento s WHERE nur ='$nur' AND id_seguimiento=0 AND oficial=1");
+$para->execute();
+$nombre_receptor = '';
+$accion = 0;
+$proveido = '';
+while ($pa = $para->fetch(PDO::FETCH_LAZY)) {
+    $nombre_receptor = $pa->nombre_receptor;
+    $accion = $pa->accion;
+    $proveido = $pa->proveido;
+}
+
 while ($rs = $stmt->fetch(PDO::FETCH_LAZY)) { 
     require('libs/fpdf17/fpdf.php');
     require('libs/fpdf17/code39.php');
@@ -43,10 +57,10 @@ while ($rs = $stmt->fetch(PDO::FETCH_LAZY)) {
     $pdf->SetXY(145, 15);    
     //codigo de barra    
     if(strpos($rs->nur, "/"))    
-        $pdf->Code39(147,20,$rs->nur,0.71,12);    
+        $pdf->Code39(147,20,$rs->nur,0.65,12);    
         //$pdf->Code39(152,21,$rs->nur,0.71,8);    
     else
-        $pdf->Code39(155,20,$rs->nur,0.71,12);
+        $pdf->Code39(155,20,$rs->nur,0.65,12);
         //$pdf->Code39(155,21,$rs->nur,0.71,8);
     //fin codigo barra
     $pdf->SetXY(145, 20);
@@ -141,7 +155,102 @@ while ($rs = $stmt->fetch(PDO::FETCH_LAZY)) {
     $pdf->Cell(10, 5, $rs->hojas, 'BLR',FALSE,'C');
     $pdf->Ln();
     //primera pagina
-    for($i=1;$i<4;$i++)
+    
+        // primer recuadro
+       $pdf->Ln(4);
+    $pdf->SetFontSize(10);
+    $pdf->SetFillColor(240,245,255);
+    $pdf->Cell(20, 7, 'Para:', 1,FALSE,'L',true);    
+    $pdf->SetFontSize(8);
+    $pdf->SetFillColor(0);
+    $pdf->Cell(60, 7, $nombre_receptor, 1,FALSE,'L');    
+    $pdf->SetFontSize(10);
+    $pdf->SetFillColor(240,245,255);
+    $pdf->Cell(10, 7, 'CC:', 1,FALSE,'L',true);
+    $pdf->SetFillColor(0);
+    $pdf->Cell(110, 7, '', 1,FALSE,'C');
+    $pdf->ln();
+    $pdf->SetFontSize(4);
+    $pdf->Cell(26, 5, 'ACCION NECESARIA Y RESPUESTA', 1,FALSE,'L');
+    if ($accion==1){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(24, 5, 'PREPARAR RESPUESTA', 1,FALSE,'L');
+    if ($accion==2){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(24, 5, 'PREPARAR INFORME', 1,FALSE,'L');
+    $pdf->SetFontSize(8);
+    if ($accion==3){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'C');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'C');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(25, 5, 'PARA SU CONSIDERACION', 1,FALSE,'L');
+    $pdf->SetFontSize(8);
+    if ($accion==4){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(25, 5, 'PARA SU CONOCIMIENTO', 1,FALSE,'L');
+    $pdf->SetFontSize(8);
+    if ($accion==5){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(15, 5, 'PARA FIRMA', 1,FALSE,'L');
+    $pdf->SetFontSize(8);
+    if ($accion==6){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(15, 5, 'DESPACHAR', 1,FALSE,'L');
+    $pdf->SetFontSize(8);
+    if ($accion==7){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->SetFontSize(4);
+    $pdf->Cell(14, 5, 'ARCHIVAR', 1,FALSE,'L');
+    $pdf->SetFontSize(8);
+    if ($accion==8){
+        $pdf->Cell(4, 5, 'X', 1,FALSE,'L');        
+    } else{
+        $pdf->Cell(4, 5, '', 1,FALSE,'L');    
+    }
+    $pdf->Ln();
+    //proveido
+    $pdf->Cell(144, 40, $proveido, 1,FALSE,'L');
+    $pdf->SetTextColor(243,249,255);
+     $pdf->SetFontSize(20);
+    $pdf->Cell(56, 40, 'Sello Recibido', 1,FALSE,'C');
+    $pdf->SetTextColor(0);
+    $pdf->Ln(40);
+    $pdf->SetFillColor(240,245,255);
+    
+    $pdf->SetFontSize(10);
+    $pdf->Cell(20, 5, 'Adjunto:', 1,FALSE,'L',true);
+    $pdf->Cell(124, 5, '', 1,FALSE,'L');
+    $pdf->SetFillColor(240,245,255);
+    $pdf->Cell(20, 5, 'Hora:', 1,FALSE,'L',true);
+    $pdf->Cell(36, 5, '', 1,FALSE,'L');
+    $pdf->Ln();
+    
+    for($i=2;$i<4;$i++)
     {
         $pdf->Ln(4);
     $pdf->SetFontSize(10);
@@ -161,13 +270,15 @@ while ($rs = $stmt->fetch(PDO::FETCH_LAZY)) {
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
     $pdf->Cell(24, 5, 'PREPARAR INFORME', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(26, 5, 'PARA SU CONOCIMIENTO', 1,FALSE,'L');
+    $pdf->Cell(25, 5, 'PARA SU CONSIDERACION', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(24, 5, 'PARA FIRMA', 1,FALSE,'L');
+    $pdf->Cell(25, 5, 'PARA SU CONOCIMIENTO', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(24, 5, 'DESPACHAR', 1,FALSE,'L');
+    $pdf->Cell(15, 5, 'PARA FIRMA', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(24, 5, 'ARCHIVAR', 1,FALSE,'L');
+    $pdf->Cell(15, 5, 'DESPACHAR', 1,FALSE,'L');
+    $pdf->Cell(4, 5, '', 1,FALSE,'L');
+    $pdf->Cell(14, 5, 'ARCHIVAR', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
     $pdf->Ln();
     //proveido
@@ -210,13 +321,15 @@ while ($rs = $stmt->fetch(PDO::FETCH_LAZY)) {
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
     $pdf->Cell(24, 5, 'PREPARAR INFORME', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(26, 5, 'PARA SU CONOCIMIENTO', 1,FALSE,'L');
+    $pdf->Cell(25, 5, 'PARA SU CONSIDERACION', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(24, 5, 'PARA FIRMA', 1,FALSE,'L');
+    $pdf->Cell(25, 5, 'PARA SU CONOCIMIENTO', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(24, 5, 'DESPACHAR', 1,FALSE,'L');
+    $pdf->Cell(15, 5, 'PARA FIRMA', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
-    $pdf->Cell(24, 5, 'ARCHIVAR', 1,FALSE,'L');
+    $pdf->Cell(15, 5, 'DESPACHAR', 1,FALSE,'L');
+    $pdf->Cell(4, 5, '', 1,FALSE,'L');
+    $pdf->Cell(14, 5, 'ARCHIVAR', 1,FALSE,'L');
     $pdf->Cell(4, 5, '', 1,FALSE,'L');
     $pdf->Ln();
     //proveido

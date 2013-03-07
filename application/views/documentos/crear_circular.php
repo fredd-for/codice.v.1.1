@@ -94,7 +94,7 @@ $('#crear').click(function(){
 <input type="hidden" name="proceso" value="4"/> 
 <p>
 <?php echo Form::label('destinatario(s)', 'Destinatario(s):',array('class'=>'form'));?>
-    <textarea name="destinatario" ROWS="5" id="destinatario" style="width: 525px;" class="required"></textarea>    
+    <textarea name="destinatario" ROWS="5" id="destinatario" style="width: 500px;" class="required"></textarea>    
 </p>
 <input type="hidden" name="cargo_des" />
 <p>
@@ -147,7 +147,7 @@ $('#crear').click(function(){
 <td colspan="2" style="padding-left: 5px;">
 <?php
 echo Form::label('referencia', 'Referencia:',array('class'=>'form'));?> 
-<textarea name="referencia" id="referencia" style="width: 525px;"></textarea>
+    <textarea name="referencia" id="referencia" style="width: 500px;" class="required"></textarea>
 </td>
 </tr>
 <tr>

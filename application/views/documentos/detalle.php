@@ -11,7 +11,7 @@
     td{padding:5px;}    
 </style>
 <h2 class="subtitulo">Descripción<br/><span>descripcion general del documento</span></h2>
-<a href="/export.php?id=<?php echo $d->id; ?>" class="uibutton" target="_blank" title="Imprimir documento" ><img src="/media/images/print.png"/> Imprimir PDF</a>
+<a href="../../pdf/<?php echo strtolower($tipo)?>.php?id=<?php echo $d->id; ?>" class="uibutton" target="_blank" title="Imprimir documento" ><img src="/media/images/print.png"/> Imprimir PDF</a>
 <div  style="width: 800px;   border: 1px solid #eee; height: 100%;  ">  
 <table style=" width: 100%;">
     <tbody>

@@ -54,7 +54,7 @@ class Model_Seguimiento extends ORM{
               FROM seguimiento s
               INNER JOIN documentos d ON s.nur=d.nur
               INNER JOIN acciones c ON s.accion=c.id      
-              INNER JOIN procesos p ON p.id=d.id_proceso												
+              INNER JOIN procesos p ON p.id=d.id_proceso
               WHERE s.estado='$id_estado'
               AND s.derivado_a='$id_user'
               AND d.original='1'"; // important
@@ -67,7 +67,7 @@ class Model_Seguimiento extends ORM{
               FROM seguimiento s
               INNER JOIN documentos d ON s.nur=d.nur
               INNER JOIN acciones c ON s.accion=c.id      
-              INNER JOIN procesos p ON p.id=d.id_proceso												
+              INNER JOIN procesos p ON p.id=d.id_proceso
               WHERE s.estado=2
               AND s.derivado_a='$id_user'
               AND d.original='1'

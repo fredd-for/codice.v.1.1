@@ -84,18 +84,22 @@ $('#crear').click(function(){
 </script>
 <h2 class="subtitulo">Crear <?php echo $documento->tipo;?> <br/><span>LLENE CORRECTAMENTE LOS DATOS EN EL FORMULARIO</span></h2>
 <div class="formulario">
-    <form action="/codice2/documento/crear/<?php echo $documento->action;?>" method="post" id="frmCreate">
+    <form action="/codice/documento/crear/<?php echo $documento->action;?>" method="post" id="frmCreate">
     <br/>
-    <fieldset> 
+    <fieldset>
+        <?php if($tipo->tipo=='Carta'):
+        echo Form::hidden('proceso',1);
+        else: ?>
         <legend>Proceso: <?php echo Form::select('proceso', $options, NULL);?></legend>
         <hr/>
+        <?php endif; ?>
     <table width="100%">
 <tr>
 <td style=" border-right:1px dashed #ccc; padding-left: 5px;">
 <?php if($documento->tipo=='Carta'):?>
 <p>
 <label>Titulo:</label>
-<select name="titulo">
+<select name="titulo" class="required">
     <option></option>
     <option>Señor</option>
     <option>Señora</option>
@@ -117,7 +121,7 @@ echo Form::label('destinatario', 'Cargo Destinatario:',array('class'=>'form'));
 echo Form::input('cargo_des','',array('id'=>'cargo_des','size'=>40,'class'=>'required'));
 ?>
 </p>   
-<?php if($tipo->via==0):?>
+    <?php if($tipo->via==0):?>
 <p>
 <label>Institución Destinatario</label>
     <input type="text" size="40" name="institucion_des" />    
@@ -193,13 +197,14 @@ echo Form::input('cargovia','',array('id'=>'cargovia','size'=>40));
 <td colspan="2" style="padding-left: 5px;">
 <?php
 echo Form::label('referencia', 'Referencia:',array('class'=>'form'));?> 
-<textarea name="referencia" id="referencia" style="width: 525px;"></textarea>
+    <textarea name="referencia" id="referencia" style="width: 500px;" class="required"></textarea>
+
 </td>
 </tr>
 <tr>
 <td colspan="3">
 <input type="hidden" id="word" value="0" name="word"  />
-<div class="descripcion" style="width: 595px; float: left; ">
+<div class="descripcion" style="width: 700px; float: left; ">
 <?php
 echo Form::textarea('descripcion','',array('id'=>'descripcion','cols'=>50,'rows'=>10));
 ?>

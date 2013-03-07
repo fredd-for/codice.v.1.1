@@ -2,6 +2,7 @@
 <script type="text/javascript">    
 $(function(){        
 //incluir destinatario
+$('#frmCreate').validate();
 $('a.destino').click(function(){
     var nombre=$(this).attr('nombre');   
     var cargo=$(this).attr('cargo');   
@@ -111,7 +112,7 @@ echo Form::input('cargorem','',array('id'=>'cargorem','size'=>40,'class'=>'requi
 <?php
 echo Form::label('referencia', 'Referencia:',array('class'=>'form'));
 ?> 
-    <textarea id="descripcion" name="descripcion" style="width:500px;"></textarea>    
+    <textarea id="descripcion" name="descripcion" style="width:500px;" class="required"></textarea>    
 <br/>    
 <br/>
 </td>

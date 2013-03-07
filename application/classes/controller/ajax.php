@@ -68,6 +68,12 @@ class Controller_Ajax extends Controller {
                     $seguimiento_actual->oficial=2;
                 }
                 $seguimiento_actual->save();
+                //incrementado por freddy
+                if(isset($usuario['oficial']))
+                {   $documento=ORM::factory('documentos',$id_doc); 
+                    $documento->estado=1;
+                    $documento->save();
+                }
             }
             else
             {       

@@ -1,3 +1,8 @@
+<script type="text/javascript">
+$(function(){
+    $("#frmUsuario").validate();
+});
+</script>
 <h2 class="subtitulo">Cambiar datos<br/><span>formulario para cambiar datos del usuario</span></h2>
 <?php if(sizeof($info)>0){?>
 <div class="info">
@@ -18,14 +23,14 @@
     </ul>
 </div>
 <?php endif;?>
-<form method="post" action="">
+<form method="post" action="" id="frmUsuario">
 <table>
         <tr>
         <td>
             Nombre completo:
         </td>        
         <td>
-            <?php echo Form::input('nombre',$user->nombre,array('size'=>40)); ?>
+            <?php echo Form::input('nombre',$user->nombre,array('size'=>40,'class'=>'required')); ?>
         </td>
         </tr>
         <tr>
@@ -33,7 +38,7 @@
             Cargo:
         </td>
         <td>
-            <?php echo Form::input('cargo',$user->cargo,array('size'=>40)); ?>
+            <?php echo Form::input('cargo',$user->cargo,array('size'=>40,'class'=>'required')); ?>
         </td>
         </tr>
         <tr>
@@ -41,7 +46,7 @@
             Mosca:
         </td>
         <td>
-            <?php echo Form::input('mosca',$user->mosca,array('size'=>40)); ?>
+            <?php echo Form::input('mosca',$user->mosca,array('size'=>40,'class'=>'required')); ?>
         </td>
         </tr>
         <tr>
@@ -49,7 +54,7 @@
             E-mail:
         </td>
         <td>
-            <?php echo Form::input('email',$user->email,array('size'=>40)); ?>
+            <?php echo Form::input('email',$user->email,array('size'=>40,'class'=>'required email')); ?>
         </td>
         </tr>
         <tr>

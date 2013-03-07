@@ -51,8 +51,8 @@
             <tr>                
                 <td><input type="checkbox" name="campo[]" value="nur" checked="checked"/><span class="sp"> Hoja de ruta </span></td>
                 <td> | <input type="checkbox" name="campo[]" value="cite_original" checked="checked"/><span class="sp"> Cite documento </span></td>
-                <td> | <input type="checkbox" name="campo[]" value="nombre_destinatario" /><span class="sp"> Destinatario </span></td>
-                <td> | <input type="checkbox" name="campo[]" value="nombre_remitente"/><span class="sp"> Remitente </span></td>
+                <td> | <input type="checkbox" name="campo[]" value="nombre_destinatario" checked="checked" /><span class="sp"> Destinatario </span></td>
+                <td> | <input type="checkbox" name="campo[]" value="nombre_remitente" checked="checked"/><span class="sp"> Remitente </span></td>
                 <td> | <input type="checkbox" name="campo[]" value="referencia" checked="checked" /><span class="sp"> Referencia </span></td>                
             </tr>
         </tbody>
